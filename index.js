@@ -44,22 +44,6 @@ async function run() {
             res.send(result)
         });
 
-        //update watch product
-        // app.put("/watchUpdate/:id", async (req, res) => {
-        //     const id = req.params.id;
-        //     const updatedName = req.body;
-        //     const filter = { _id: ObjectId(id) };
-        //     productsCollection
-        //         .updateOne(filter, {
-        //             $set: {
-        //                 model: updatedName.model,
-        //             },
-        //         })
-        //         .then((result) => {
-        //             res.send(result);
-        //         });
-        // });
-
         //GET Single Watch API
         app.get('/watch/:id', async (req, res) => {
             const id = req.params.id;
