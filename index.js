@@ -30,6 +30,43 @@ async function run() {
             const result = await watchesCollection.insertOne(newWatch);
             res.send(result);
         });
+        // get watches
+        app.get('/watches', async (req, res) => {
+            const cursor = watchesCollection.find({});
+            const watches = await cursor.toArray();
+            res.send(watches);
+        });
+        // Delete Watch product
+        app.delete('/deletewatch/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const result = await watchesCollection.deleteOne(query);
+            res.send(result)
+        });
+
+        //update watch product
+        // app.put("/watchUpdate/:id", async (req, res) => {
+        //     const id = req.params.id;
+        //     const updatedName = req.body;
+        //     const filter = { _id: ObjectId(id) };
+        //     productsCollection
+        //         .updateOne(filter, {
+        //             $set: {
+        //                 model: updatedName.model,
+        //             },
+        //         })
+        //         .then((result) => {
+        //             res.send(result);
+        //         });
+        // });
+
+        //GET Single Watch API
+        app.get('/watch/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const tourPackage = await watchesCollection.findOne(query);
+            res.send(tourPackage);
+        });
 
         // Add user into database
         app.post('/users', async (req, res) => {
